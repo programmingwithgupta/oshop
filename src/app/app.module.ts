@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import  { AngularFireModule } from 'angularfire2';
 import  { AngularFireAuthModule } from 'angularfire2/auth';
+import  { AngularFireDatabaseModule } from 'angularfire2/database';
+
 import { FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
@@ -17,6 +19,9 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './services/category.service';
+import { ProductService } from './services/product.service';
 
 @NgModule({
   declarations: [
@@ -30,12 +35,14 @@ import { LoginComponent } from './login/login.component';
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     NgbModule,
     FormsModule,    
     RouterModule.forRoot([
@@ -48,12 +55,20 @@ import { LoginComponent } from './login/login.component';
       { path : 'admin/products', component : AdminProductsComponent},
       { path : 'admin/orders', component : AdminOrdersComponent},
       { path : 'my/orders', component : MyOrdersComponent},
-
+      { path : 'admin/products/new', component : ProductFormComponent},
+      { 
+        path : 'admin/products/:id',
+       component : ProductFormComponent
+      },
+      { path : 'admin/products', component : AdminProductsComponent},
     ])
     
 
   ],
-  providers: [],
+  providers: [
+    CategoryService,
+    ProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
