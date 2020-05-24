@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { ProductService } from './../../services/product.service';
 import { CategoryService } from './../../services/category.service';
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../../models/product'
+
 import 'rxjs/add/operator/take'; 
 
 @Component({
@@ -12,7 +14,7 @@ import 'rxjs/add/operator/take';
 })
 export class ProductFormComponent implements OnInit {
   categories$;
-  product = {}; 
+  product : any  = {}  ; 
   id;
 
   constructor(
@@ -23,7 +25,7 @@ export class ProductFormComponent implements OnInit {
     this.categories$ = categoryService.getAll();
     
     this.id = this.route.snapshot.paramMap.get('id');
-    if (this.id) this.productService.get(this.id).take(1).subscribe(p => this.product = p);
+    if (this.id) this.productService.get(this.id).subscribe(p => this.product = p);
   }
 
   save(product) { 

@@ -5,7 +5,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import  { AngularFireModule } from 'angularfire2';
 import  { AngularFireAuthModule } from 'angularfire2/auth';
 import  { AngularFireDatabaseModule } from 'angularfire2/database';
-
 import { FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
@@ -22,6 +21,8 @@ import { LoginComponent } from './login/login.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoryService } from './services/category.service';
 import { ProductService } from './services/product.service';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,9 @@ import { ProductService } from './services/product.service';
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductFilterComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +47,9 @@ import { ProductService } from './services/product.service';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     NgbModule,
-    FormsModule,    
+    FormsModule,   
     RouterModule.forRoot([
-      { path : '', component : HomeComponent},
+      { path : '', component : ProductsComponent},
       { path : 'products', component : ProductsComponent},
       { path : 'shopping-cart', component : ShoppingCartComponent},
       { path : 'order-success', component : OrderSuccessComponent},
@@ -60,7 +63,10 @@ import { ProductService } from './services/product.service';
         path : 'admin/products/:id',
        component : ProductFormComponent
       },
-      { path : 'admin/products', component : AdminProductsComponent},
+      { 
+        path : 'admin/products', 
+        component : AdminProductsComponent
+      },
     ])
     
 
